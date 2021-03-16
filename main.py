@@ -2,7 +2,7 @@ import fastapi
 import uvicorn
 from starlette.requests import Request
 from routes import weather
-from api.openweather import api_key 
+from api import openweather 
 import json
 from pathlib import Path
 app = fastapi.FastAPI()
@@ -19,7 +19,7 @@ def config_apikeys():
         raise Exception('config file that contain secrets key does not exists')
     with open('config.json') as fin:
         config = json.load(fin)
-        api_key = config.get('api_key')
+        openweather.api_key = config.get('api_key')
 
 def config_routes():
     app.include_router(weather.router)
