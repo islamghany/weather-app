@@ -5,8 +5,19 @@ from routes import weather
 from api import openweather 
 import json
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
+
 app = fastapi.FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def config():
     config_routes()
